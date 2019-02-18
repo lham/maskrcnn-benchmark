@@ -42,7 +42,7 @@ class AnchorGenerator(nn.Module):
         sizes=(128, 256, 512),
         aspect_ratios=(0.5, 1.0, 2.0),
         anchor_strides=(8, 16, 32),
-        straddle_thresh=0,
+        straddle_thresh=0.0,
     ):
         super(AnchorGenerator, self).__init__()
 
