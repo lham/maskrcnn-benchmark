@@ -42,7 +42,7 @@ class AnchorGenerator(nn.Module):
         sizes=(128, 256, 512),
         aspect_ratios=(0.5, 1.0, 2.0),
         anchor_strides=(8, 16, 32),
-        straddle_thresh=0.0,
+        straddle_thresh=0,
     ):
         super(AnchorGenerator, self).__init__()
 
@@ -101,8 +101,8 @@ class AnchorGenerator(nn.Module):
             inds_inside = (
                 (anchors[..., 0] >= -self.straddle_thresh)
                 & (anchors[..., 1] >= -self.straddle_thresh)
-                & (anchors[..., 2] < image_width + self.straddle_thresh)
-                & (anchors[..., 3] < image_height + self.straddle_thresh)
+                & (anchors[..., 2] < float(image_width + self.straddle_thresh))
+                & (anchors[..., 3] < float(image_height + self.straddle_thresh))
             )
         else:
             device = anchors.device
